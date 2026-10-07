@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>มุมของพร้อมใช้ · zendbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    --ink:#15202b; --muted:#5b6b7a; --line:#e4e9ee; --paper:#f6f8fa; --card:#ffffff;
+    --z-teal:#0B4A3C; --z-teal-2:#0f5d4b; --z-amber:#EF9F27;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans Thai",system-ui,sans-serif;line-height:1.6;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,32px);}
+
+  /* HERO */
+  .hero{background:linear-gradient(140deg,var(--z-teal),var(--z-teal-2));color:#fff;
+    padding:clamp(40px,8vw,84px) 0 clamp(36px,7vw,72px);}
+  .hero .wrap{display:flex;flex-direction:column;gap:16px;}
+  .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+    color:#fff;padding:7px 15px;border-radius:999px;
+    font-family:"Prompt";font-weight:600;font-size:13px;letter-spacing:.3px;}
+  .badge .dot{width:9px;height:9px;border-radius:50%;background:var(--z-amber);}
+  .hero h1{font-family:"Prompt";font-weight:700;font-size:clamp(28px,6vw,50px);
+    line-height:1.12;margin:6px 0 0;max-width:17ch;}
+  .hero p{font-size:clamp(15px,2.3vw,19px);color:#d3e6df;max-width:56ch;margin:0;}
+  .hero p b{color:#fff;font-weight:600;}
+  .hero-cta{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+    margin-top:10px;background:var(--z-amber);color:#1a1200;text-decoration:none;
+    font-family:"Prompt";font-weight:600;padding:13px 26px;border-radius:999px;font-size:16px;}
+
+  /* SECTION intro */
+  .sec{padding:clamp(40px,7vw,72px) 0;}
+  .sec-head{max-width:60ch;margin-bottom:clamp(26px,4vw,40px);}
+  .sec-head h2{font-family:"Prompt";font-weight:700;font-size:clamp(23px,4vw,34px);
+    margin:0 0 10px;line-height:1.18;}
+  .sec-head p{color:var(--muted);font-size:clamp(15px,2vw,17px);margin:0;}
+
+  /* 3 products */
+  .prods{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:clamp(16px,2.5vw,24px);}
+  .prod{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:clamp(22px,3vw,30px);display:flex;flex-direction:column;gap:10px;}
+  .prod .pic{font-size:30px;line-height:1;}
+  .prod h3{font-family:"Prompt";font-weight:600;font-size:19px;margin:2px 0 0;}
+  .prod .what{color:var(--muted);font-size:14.5px;margin:0;flex:1;}
+  .prod .mini{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+    margin-top:6px;color:var(--z-teal);text-decoration:none;font-weight:600;font-size:14.5px;}
+
+  /* showcase grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:clamp(18px,3vw,26px);}
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;}
+  .ex-head{padding:18px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);}
+  .ex-emoji{font-size:26px;line-height:1;}
+  .ex-title{font-family:"Prompt";font-weight:600;font-size:17px;margin:0;}
+  .ex-sub{font-size:12.5px;color:var(--muted);margin:1px 0 0;}
+  .phone{padding:20px;background:var(--paper);}
+  .rm{border-radius:14px;overflow:hidden;box-shadow:0 6px 22px rgba(21,32,43,.09);display:grid;}
+  .cell{position:relative;min-height:62px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:5px;text-align:center;color:#fff;padding:10px 6px;}
+  .cell .ic{font-size:21px;line-height:1;}
+  .cell .lb{font-size:12px;font-weight:600;line-height:1.2;}
+  .rm.v6{grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;}
+  .rm.v4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;}
+  .rm.v3{grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr;}
+  .rm.big{grid-template-columns:1fr 1fr;grid-template-rows:1.4fr 1fr;}
+  .rm.big .hero-cell{grid-column:1 / -1;min-height:92px;}
+  .ex-foot{padding:13px 20px 18px;display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{font-size:11.5px;color:var(--muted);background:var(--paper);border:1px solid var(--line);
+    padding:4px 10px;border-radius:999px;}
+
+  /* FLEX showcase */
+  .flexgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:clamp(18px,3vw,26px);}
+  .flexwrap{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;}
+  .flexwrap .ex-head{padding:18px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);}
+  .flexstage{padding:22px 20px;background:var(--paper);display:flex;justify-content:center;}
+  /* a LINE-style flex bubble */
+  .bubble{width:100%;max-width:250px;background:#fff;border-radius:16px;overflow:hidden;
+    box-shadow:0 6px 22px rgba(21,32,43,.12);font-size:13px;color:#15202b;}
+  .bb-hero{padding:16px;color:#fff;}
+  .bb-hero .ey{font-size:12px;opacity:.9;font-weight:600;}
+  .bb-hero .ti{font-family:"Prompt";font-weight:700;font-size:20px;line-height:1.2;margin-top:3px;}
+  .bb-body{padding:14px 16px;display:flex;flex-direction:column;gap:9px;}
+  .bb-row{display:flex;justify-content:space-between;gap:10px;}
+  .bb-row .l{color:#5b6b7a;}
+  .bb-row .r{font-weight:600;}
+  .bb-div{height:1px;background:#eef2f5;margin:2px 0;}
+  .bb-total{display:flex;justify-content:space-between;font-family:"Prompt";font-weight:700;font-size:16px;}
+  .bb-total .amt{color:#0B4A3C;}
+  .bb-btn{margin:4px 16px 16px;padding:11px;border-radius:10px;text-align:center;color:#fff;
+    font-weight:600;font-family:"Prompt";font-size:14px;}
+  .bb-img{height:118px;display:flex;align-items:center;justify-content:center;font-size:44px;}
+  .bb-cap{font-size:11.5px;color:#8a97a3;}
+
+  /* STICKER showcase */
+  .stkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:clamp(14px,2.5vw,20px);}
+  .stk{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 14px;
+    display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
+  .stk .face{width:94px;height:94px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+    font-size:46px;position:relative;}
+  .stk .cap{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25;}
+  .stk .biz{font-size:11px;color:var(--muted);}
+
+  /* why */
+  .why{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(16px,3vw,28px);}
+  .why-item{display:flex;flex-direction:column;gap:7px;}
+  .why-item .k{font-family:"Prompt";font-weight:600;font-size:17px;display:flex;align-items:center;gap:9px;}
+  .why-item .k .chk{color:var(--z-teal);font-size:19px;}
+  .why-item p{color:var(--muted);font-size:14.5px;margin:0;padding-left:28px;}
+
+  /* CTA */
+  .cta{padding:clamp(40px,7vw,76px) 0;}
+  .cta .box{background:linear-gradient(140deg,var(--z-teal),var(--z-teal-2));color:#fff;
+    border-radius:24px;padding:clamp(30px,5vw,52px);text-align:center;}
+  .cta h2{font-family:"Prompt";font-weight:700;font-size:clamp(23px,4vw,34px);margin:0 0 12px;}
+  .cta p{color:#cfe3dc;margin:0 auto 24px;max-width:48ch;font-size:16px;}
+  .cta a{display:inline-flex;align-items:center;gap:9px;background:var(--z-amber);color:#1a1200;
+    text-decoration:none;font-family:"Prompt";font-weight:600;padding:14px 30px;border-radius:999px;font-size:17px;}
+  .foot{text-align:center;color:var(--muted);font-size:12.5px;padding:0 0 clamp(26px,5vw,40px);}
+
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){--ink:#eef3f7;--muted:#9fb0bf;--line:#283440;--paper:#0e151c;--card:#141d26;}
+  }
+  :root[data-theme="dark"]{--ink:#eef3f7;--muted:#9fb0bf;--line:#283440;--paper:#0e151c;--card:#141d26;}
+  @media (prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}.reveal.in{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <span class="badge"><span class="dot"></span>มุมของพร้อมใช้ · zendbot</span>
+      <h1>ของพร้อมใช้ ให้ร้านคุณดูมืออาชีพใน LINE</h1>
+      <p>เลือกแบบที่ชอบ ใช้ได้เลย — หรือบอกเราว่าอยากปรับแบบไหน <b>ให้เข้ากับแบรนด์ของคุณ</b></p>
+      <a class="hero-cta" href="#ask">ทักเราเพื่อเริ่ม →</a>
+    </div>
+  </header>
+
+  <!-- 3 PRODUCTS -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>มี 3 อย่างให้เลือกใช้</h2>
+        <p>แต่ละอย่างช่วยให้ร้านคุณสื่อสารกับลูกค้าใน LINE ได้ดีขึ้น เลือกแบบสำเร็จ หรือให้เราปรับให้เข้ากับร้านคุณ</p>
+      </div>
+      <div class="prods">
+        <div class="prod reveal">
+          <span class="pic">🎨</span>
+          <h3>Rich Menu — หน้าร้านใต้ห้องแชท</h3>
+          <p class="what">เมนูปุ่มใหญ่ใต้ห้องแชท LINE ให้ลูกค้ากดสั่ง จอง ดูโปรได้ทันที ออกแบบให้ตรงกับธุรกิจคุณ</p>
+          <a class="mini" href="#showcase">ดูตัวอย่างตามธุรกิจ →</a>
+        </div>
+        <div class="prod reveal">
+          <span class="pic">💬</span>
+          <h3>Flex Message — ข้อความที่ปิดการขาย</h3>
+          <p class="what">การ์ดข้อความสวยๆ ส่งให้ลูกค้า — โปรโมชัน ใบเสร็จ สรุปออเดอร์ การ์ดสินค้า ดูดีกว่าข้อความธรรมดา</p>
+          <a class="mini" href="#flex">ดูตัวอย่าง Flex →</a>
+        </div>
+        <div class="prod reveal">
+          <span class="pic">😊</span>
+          <h3>สติกเกอร์ — แบรนด์คุณในทุกแชท</h3>
+          <p class="what">สติกเกอร์ตามธุรกิจและเทศกาล ให้ลูกค้าจำร้านคุณได้ ใช้ทักทาย ขอบคุณ แจ้งโปร เป็นกันเอง</p>
+          <a class="mini" href="#sticker">ดูชุดสติกเกอร์ →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section class="sec" id="showcase" style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Rich Menu ที่ออกแบบตามใจแต่ละธุรกิจ</h2>
+        <p>แต่ละธุรกิจมีจังหวะและปุ่มที่ลูกค้าต้องการต่างกัน นี่คือตัวอย่างที่ปรับให้เข้ากับคาแรกเตอร์ของแต่ละแบบ</p>
+      </div>
+      <div class="grid">
+
+        <article class="ex reveal">
+          <div class="ex-head"><span class="ex-emoji">🍜</span><div><p class="ex-title">ร้านอาหาร</p><p class="ex-sub">สั่ง จอง ดูเมนู ครบในปุ่มเดียว</p></div></div>
+          <div class="phone"><div class="rm big">
+            <div class="cell hero-cell" style="background:linear-gradient(135deg,#c0392b,#e8622f)"><span class="ic">🍲</span><span class="lb">เมนูวันนี้ · โปรเด็ด</span></div>
+            <div class="cell" style="background:#e8622f"><span class="ic">🛵</span><span class="lb">สั่งเดลิเวอรี</span></div>
+            <div class="cell" style="background:#d84c2a"><span class="ic">🪑</span><span class="lb">จองโต๊ะ</span></div>
+            <div class="cell" style="background:#b8321f"><span class="ic">📍</span><span class="lb">แผนที่ร้าน</span></div>
+            <div class="cell" style="background:#a82a1a"><span class="ic">⭐</span><span class="lb">รีวิว</span></div>
+          </div></div>
+          <div class="ex-foot"><span class="tag">โทนอุ่น เรียกน้ำย่อย</span><span class="tag">ปุ่มสั่งเด่นสุด</span></div>
+        </article>
+
+        <article class="ex reveal">
+          <div class="ex-head"><span class="ex-emoji">💆</span><div><p class="ex-title">สปา &amp; คลินิกความงาม</p><p class="ex-sub">นัดหมาย คอร์ส โปรสมาชิก</p></div></div>
+          <div class="phone"><div class="rm v6">
+            <div class="cell" style="background:#8a7968"><span class="ic">🗓️</span><span class="lb">จองคิว</span></div>
+            <div class="cell" style="background:#9c8b78"><span class="ic">🌿</span><span class="lb">ทรีตเมนต์</span></div>
+            <div class="cell" style="background:#b0a08d"><span class="ic">💎</span><span class="lb">แพ็กเกจ</span></div>
+            <div class="cell" style="background:#c4b6a3"><span class="ic">🎁</span><span class="lb">โปรสมาชิก</span></div>
+            <div class="cell" style="background:#8a7968"><span class="ic">📷</span><span class="lb">ผลงาน</span></div>
+            <div class="cell" style="background:#6f6155"><span class="ic">💬</span><span class="lb">ปรึกษา</span></div>
+          </div></div>
+          <div class="ex-foot"><span class="tag">โทนเอิร์ธ ผ่อนคลาย</span><span class="tag">เน้นจองคิว</span></div>
+        </article>
+
+        <article class="ex reveal">
+          <div class="ex-head"><span class="ex-emoji">✈️</span><div><p class="ex-title">ทัวร์ &amp; ท่องเที่ยว</p><p class="ex-sub">แพ็กเกจ จองทริป วีซ่า ประกัน</p></div></div>
+          <div class="phone"><div class="rm big">
+            <div class="cell hero-cell" style="background:linear-gradient(135deg,#1769aa,#28a0c9)"><span class="ic">🗺️</span><span class="lb">แพ็กเกจทัวร์ · ทริปใหม่</span></div>
+            <div class="cell" style="background:#1f8fb8"><span class="ic">🎫</span><span class="lb">จองทริป</span></div>
+            <div class="cell" style="background:#2aa5c4"><span class="ic">🛂</span><span class="lb">ทำวีซ่า</span></div>
+            <div class="cell" style="background:#1769aa"><span class="ic">🛡️</span><span class="lb">ประกันเดินทาง</span></div>
+            <div class="cell" style="background:#145a92"><span class="ic">💬</span><span class="lb">สอบถาม</span></div>
+          </div></div>
+          <div class="ex-foot"><span class="tag">โทนฟ้า-ทะเล สดใส</span><span class="tag">โชว์แพ็กเกจ</span></div>
+        </article>
+
+        <article class="ex reveal">
+          <div class="ex-head"><span class="ex-emoji">🛍️</span><div><p class="ex-title">ร้านค้า &amp; ช้อป</p><p class="ex-sub">สินค้า โปร สั่งซื้อ ติดตามพัสดุ</p></div></div>
+          <div class="phone"><div class="rm v6">
+            <div class="cell" style="background:#6a3fb5"><span class="ic">🛒</span><span class="lb">สั่งซื้อ</span></div>
+            <div class="cell" style="background:#7d4fc9"><span class="ic">🔥</span><span class="lb">โปรโมชัน</span></div>
+            <div class="cell" style="background:#8f5fd6"><span class="ic">✨</span><span class="lb">สินค้าใหม่</span></div>
+            <div class="cell" style="background:#9a6ee0"><span class="ic">📦</span><span class="lb">ติดตามพัสดุ</span></div>
+            <div class="cell" style="background:#5a32a0"><span class="ic">🏷️</span><span class="lb">แคตตาล็อก</span></div>
+            <div class="cell" style="background:#4a2888"><span class="ic">💬</span><span class="lb">แชทสั่งของ</span></div>
+          </div></div>
+          <div class="ex-foot"><span class="tag">โทนม่วง ทันสมัย</span><span class="tag">ซื้อ+ติดตาม</span></div>
+        </article>
+
+        <article class="ex reveal">
+          <div class="ex-head"><span class="ex-emoji">💪</span><div><p class="ex-title">ฟิตเนส &amp; เทรนเนอร์</p><p class="ex-sub">สมัคร จองคลาส ตารางเทรน</p></div></div>
+          <div class="phone"><div class="rm v4">
+            <div class="cell" style="background:#1a1a1d"><span class="ic">🎟️</span><span class="lb">สมัครสมาชิก</span></div>
+            <div class="cell" style="background:#23232a"><span class="ic">📅</span><span class="lb">จองคลาส</span></div>
+            <div class="cell" style="background:#2d2d35;color:#d4ff3f"><span class="ic">🏋️</span><span class="lb">ตารางเทรน</span></div>
+            <div class="cell" style="background:#17171a;color:#d4ff3f"><span class="ic">💬</span><span class="lb">ติดต่อเทรนเนอร์</span></div>
+          </div></div>
+          <div class="ex-foot"><span class="tag">โทนดำ-เขียวนีออน</span><span class="tag">ปลุกพลัง</span></div>
+        </article>
+
+        <article class="ex reveal">
+          <div class="ex-head"><span class="ex-emoji">🔧</span><div><p class="ex-title">ร้านบริการ &amp; ซ่อม</p><p class="ex-sub">นัดช่าง เช็กราคา ติดตามงาน</p></div></div>
+          <div class="phone"><div class="rm v3">
+            <div class="cell" style="background:#b5651d"><span class="ic">🧰</span><span class="lb">นัดช่าง</span></div>
+            <div class="cell" style="background:#c9771f"><span class="ic">💰</span><span class="lb">เช็กราคา</span></div>
+            <div class="cell" style="background:#8f4e14"><span class="ic">📋</span><span class="lb">ติดตามงาน</span></div>
+          </div></div>
+          <div class="ex-foot"><span class="tag">โทนส้ม-น้ำตาล น่าเชื่อถือ</span><span class="tag">3 ปุ่มตรงจุด</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEX SHOWCASE -->
+  <section class="sec" id="flex" style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Flex Message — ข้อความที่ลูกค้าอยากกด</h2>
+        <p>แทนข้อความธรรมดาด้วยการ์ดสวยๆ ที่อ่านง่ายและดูน่าเชื่อถือ ใช้ส่งโปร ใบเสร็จ หรือการ์ดสินค้า</p>
+      </div>
+      <div class="flexgrid">
+
+        <!-- โปรโมชัน -->
+        <div class="flexwrap reveal">
+          <div class="ex-head"><span class="ex-emoji">🔥</span><div><p class="ex-title">การ์ดโปรโมชัน</p><p class="ex-sub">ส่งแคมเปญให้ดูน่ากด</p></div></div>
+          <div class="flexstage">
+            <div class="bubble">
+              <div class="bb-hero" style="background:linear-gradient(135deg,#c0392b,#e8622f)">
+                <div class="ey">PAYDAY SALE</div>
+                <div class="ti">ลดสูงสุด 50%</div>
+              </div>
+              <div class="bb-body">
+                <div class="bb-cap">เฉพาะวันที่ 25–31 เดือนนี้เท่านั้น</div>
+                <div class="bb-row"><span class="l">เมนูแนะนำ</span><span class="r">เริ่ม ฿99</span></div>
+                <div class="bb-row"><span class="l">ส่งฟรี</span><span class="r">เมื่อครบ ฿300</span></div>
+              </div>
+              <div class="bb-btn" style="background:#e8622f">สั่งเลย</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ใบเสร็จ/สรุปออเดอร์ -->
+        <div class="flexwrap reveal">
+          <div class="ex-head"><span class="ex-emoji">🧾</span><div><p class="ex-title">สรุปออเดอร์ / ใบเสร็จ</p><p class="ex-sub">ยืนยันการสั่งซื้อ ชัดเจน</p></div></div>
+          <div class="flexstage">
+            <div class="bubble">
+              <div class="bb-hero" style="background:#0B4A3C">
+                <div class="ey">ORDER #10287</div>
+                <div class="ti">สรุปคำสั่งซื้อ</div>
+              </div>
+              <div class="bb-body">
+                <div class="bb-row"><span class="l">ข้าวกะเพรา ×2</span><span class="r">฿160</span></div>
+                <div class="bb-row"><span class="l">ชาเย็น ×2</span><span class="r">฿80</span></div>
+                <div class="bb-row"><span class="l">ค่าส่ง</span><span class="r">฿20</span></div>
+                <div class="bb-div"></div>
+                <div class="bb-total"><span>รวม</span><span class="amt">฿260</span></div>
+              </div>
+              <div class="bb-btn" style="background:#0B4A3C">ชำระเงิน</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- การ์ดสินค้า -->
+        <div class="flexwrap reveal">
+          <div class="ex-head"><span class="ex-emoji">🛍️</span><div><p class="ex-title">การ์ดสินค้า</p><p class="ex-sub">โชว์สินค้าให้ลูกค้าเลือก</p></div></div>
+          <div class="flexstage">
+            <div class="bubble">
+              <div class="bb-img" style="background:linear-gradient(135deg,#6a3fb5,#9a6ee0)">👜</div>
+              <div class="bb-body">
+                <div style="font-family:'Prompt';font-weight:600;font-size:15px;">กระเป๋ารุ่นใหม่</div>
+                <div class="bb-cap">หนังแท้ · มี 4 สี</div>
+                <div class="bb-total"><span style="font-size:13px;color:#5b6b7a;font-weight:400;">ราคา</span><span class="amt">฿1,290</span></div>
+              </div>
+              <div class="bb-btn" style="background:#7d4fc9">ดูรายละเอียด</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKER SHOWCASE -->
+  <section class="sec" id="sticker" style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>สติกเกอร์ — แบรนด์คุณในทุกบทสนทนา</h2>
+        <p>สติกเกอร์ตามธุรกิจและเทศกาล ให้ร้านคุณเป็นมิตร จดจำง่าย ใช้ทักทาย ขอบคุณ แจ้งโปร</p>
+      </div>
+      <div class="stkgrid">
+        <div class="stk reveal"><div class="face" style="background:#ffe9d6">👩‍🍳</div><div class="cap">ยินดีต้อนรับ</div><div class="biz">ร้านอาหาร</div></div>
+        <div class="stk reveal"><div class="face" style="background:#e6f0ec">🙏</div><div class="cap">ขอบคุณค่ะ</div><div class="biz">สปา</div></div>
+        <div class="stk reveal"><div class="face" style="background:#dceefb">✈️</div><div class="cap">เที่ยวกันเถอะ</div><div class="biz">ทัวร์</div></div>
+        <div class="stk reveal"><div class="face" style="background:#efe6fb">🛍️</div><div class="cap">โปรมาแล้ว!</div><div class="biz">ร้านค้า</div></div>
+        <div class="stk reveal"><div class="face" style="background:#ffeef0">🎄</div><div class="cap">สุขสันต์ปีใหม่</div><div class="biz">เทศกาล</div></div>
+        <div class="stk reveal"><div class="face" style="background:#fff3d6">🎉</div><div class="cap">สงกรานต์สุขใจ</div><div class="biz">เทศกาล</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <div class="wrap sec">
+      <div class="sec-head"><h2>ทำไมเลือกมุมของพร้อมใช้</h2></div>
+      <div class="why-grid">
+        <div class="why-item"><div class="k"><span class="chk">✓</span>เห็นแบบก่อนตัดสินใจ</div><p>ดูตัวอย่างจริงก่อน ไม่ต้องจินตนาการเอง</p></div>
+        <div class="why-item"><div class="k"><span class="chk">✓</span>ปรับตามแบรนด์คุณ</div><p>สี โลโก้ ปุ่ม ปรับให้เข้ากับร้านของคุณได้</p></div>
+        <div class="why-item"><div class="k"><span class="chk">✓</span>ใช้ได้เร็ว</div><p>เลือกแบบที่ใช่ เริ่มใช้ได้ ไม่ต้องรอพัฒนานาน</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="ask">
+    <div class="wrap">
+      <div class="box">
+        <h2>พร้อมให้ร้านคุณดูดีใน LINE แล้วหรือยัง?</h2>
+        <p>เลือกแบบที่ใช่ หรือให้เราปรับให้เข้ากับแบรนด์คุณ — ทักมาคุยได้เลย</p>
+        <a href="#" id="lineBtn">ทักเราทาง LINE →</a>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">zendbot · มุมของพร้อมใช้ — ตัวอย่างเพื่อการนำเสนอ ปรับสี ปุ่ม และโลโก้ได้ตามแบรนด์จริง</p>
+
+<script>
+  // LIFF/fanpage hybrid: ปุ่ม LINE ตั้งค่าได้ทีหลังเมื่อมี OA จริง
+  // ถ้าเปิดใน LIFF → ใช้ liff.openWindow ได้; ถ้าเปิดในเบราว์เซอร์/fanpage → ใช้ลิงก์ปกติ
+  (function(){
+    var LINE_OA_URL = ""; // ← ใส่ลิงก์ LINE OA zendbot ตรงนี้เมื่อ setup เสร็จ (เช่น https://line.me/R/ti/p/@zendbot)
+    var btn = document.getElementById('lineBtn');
+    var heroBtn = document.querySelector('.hero-cta');
+    [btn, heroBtn].forEach(function(b){
+      if(!b) return;
+      b.addEventListener('click', function(e){
+        if(!LINE_OA_URL){ e.preventDefault(); alert('เร็วๆ นี้ — กำลังเตรียมช่องทาง LINE'); return; }
+        e.preventDefault();
+        if(window.liff && liff.isInClient && liff.isInClient()){ liff.openWindow({url:LINE_OA_URL, external:true}); }
+        else { window.open(LINE_OA_URL, '_blank'); }
+      });
+    });
+  })();
+</script>
+<script>(function(){if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)return;var els=document.querySelectorAll(".reveal");if(!("IntersectionObserver"in window)){els.forEach(function(e){e.classList.add("in")});return;}var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}})},{threshold:.12});els.forEach(function(e){io.observe(e)});})();</script>
+</body>
+</html>

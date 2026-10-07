@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>zendbot · ระบบ LINE OA สำหรับร้านค้าและธุรกิจไทย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    --ink:#15202b; --muted:#5b6b7a; --line:#e4e9ee; --paper:#f6f8fa; --card:#ffffff;
+    --z-teal:#0B4A3C; --z-teal-2:#0f5d4b; --z-amber:#EF9F27;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans Thai",system-ui,sans-serif;line-height:1.6;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,32px);}
+  a{color:inherit;}
+
+  /* top bar */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(246,248,250,.85);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .brand{display:flex;align-items:center;gap:9px;font-family:"Prompt";font-weight:700;font-size:20px;}
+  .brand .mk{width:26px;height:26px;border-radius:7px;background:var(--z-teal);position:relative;}
+  .brand .mk::after{content:"";position:absolute;right:5px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--z-amber);}
+  .nav a.navcta{background:var(--z-teal);color:#fff;text-decoration:none;font-weight:600;
+    font-family:"Prompt";font-size:14px;padding:9px 18px;border-radius:999px;}
+
+  /* HERO */
+  .hero{background:linear-gradient(140deg,var(--z-teal),var(--z-teal-2));color:#fff;
+    padding:clamp(48px,9vw,96px) 0 clamp(44px,8vw,84px);}
+  .hero .wrap{display:flex;flex-direction:column;gap:18px;align-items:flex-start;}
+  .eye{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:999px;
+    font-family:"Prompt";font-weight:600;font-size:13px;}
+  .eye .dot{width:9px;height:9px;border-radius:50%;background:var(--z-amber);}
+  .hero h1{font-family:"Prompt";font-weight:700;font-size:clamp(30px,6.5vw,56px);
+    line-height:1.1;margin:4px 0 0;max-width:16ch;}
+  .hero p{font-size:clamp(16px,2.4vw,20px);color:#d3e6df;max-width:52ch;margin:0;}
+  .hero p b{color:#fff;font-weight:600;}
+  .hbtns{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+  .btn-a{background:var(--z-amber);color:#1a1200;}
+  .btn-b{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);}
+  .hbtns a{display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    font-family:"Prompt";font-weight:600;padding:13px 26px;border-radius:999px;font-size:16px;}
+
+  /* intro line */
+  .sec{padding:clamp(44px,7vw,80px) 0;}
+  .sec-head{max-width:62ch;margin-bottom:clamp(24px,4vw,38px);}
+  .sec-head h2{font-family:"Prompt";font-weight:700;font-size:clamp(24px,4vw,36px);margin:0 0 10px;line-height:1.16;}
+  .sec-head p{color:var(--muted);font-size:clamp(15px,2vw,17px);margin:0;}
+
+  /* 3 ZONE CARDS */
+  .zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(18px,3vw,26px);}
+  .zone{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,3vw,32px);
+    display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease;position:relative;overflow:hidden;}
+  .zone:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(21,32,43,.1);}
+  .zone .stripe{position:absolute;left:0;top:0;bottom:0;width:5px;}
+  .zone .zt{display:flex;align-items:center;gap:11px;}
+  .zone .zemoji{font-size:28px;line-height:1;}
+  .zone h3{font-family:"Prompt";font-weight:700;font-size:21px;margin:0;}
+  .zone .ztag{font-size:12px;color:var(--muted);font-weight:500;}
+  .zone .zdesc{color:var(--muted);font-size:14.5px;margin:0;flex:1;}
+  .zone .zlist{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:7px;}
+  .zone .zlist li{font-size:12px;background:var(--paper);border:1px solid var(--line);padding:4px 10px;border-radius:999px;color:var(--muted);}
+  .zone .zgo{display:inline-flex;align-items:center;gap:8px;font-family:"Prompt";font-weight:600;font-size:15px;margin-top:4px;}
+
+  /* CASE */
+  .case{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .case .wrap{display:flex;flex-direction:column;gap:14px;max-width:70ch;}
+  .case .q{font-family:"Prompt";font-weight:600;font-size:clamp(19px,3vw,26px);line-height:1.4;margin:0;}
+  .case .who{color:var(--muted);font-size:14.5px;margin:0;}
+
+  /* CONTACT */
+  .cta{padding:clamp(44px,7vw,84px) 0;}
+  .cta .box{background:linear-gradient(140deg,var(--z-teal),var(--z-teal-2));color:#fff;
+    border-radius:24px;padding:clamp(32px,5vw,56px);text-align:center;}
+  .cta h2{font-family:"Prompt";font-weight:700;font-size:clamp(24px,4vw,36px);margin:0 0 12px;}
+  .cta p{color:#cfe3dc;margin:0 auto 24px;max-width:46ch;font-size:16px;}
+  .cta a{display:inline-flex;align-items:center;gap:9px;background:var(--z-amber);color:#1a1200;
+    text-decoration:none;font-family:"Prompt";font-weight:600;padding:14px 30px;border-radius:999px;font-size:17px;}
+
+  .foot{border-top:1px solid var(--line);}
+  .foot .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
+    padding-top:22px;padding-bottom:22px;color:var(--muted);font-size:13px;}
+
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){--ink:#eef3f7;--muted:#9fb0bf;--line:#283440;--paper:#0e151c;--card:#141d26;}
+    .nav{background:rgba(14,21,28,.85);}
+  }
+  :root[data-theme="dark"]{--ink:#eef3f7;--muted:#9fb0bf;--line:#283440;--paper:#0e151c;--card:#141d26;}
+  @media (prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}.reveal.in{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap">
+      <span class="brand"><span class="mk"></span>zendbot</span>
+      <a class="navcta" href="#contact">ทักเรา</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <span class="eye"><span class="dot"></span>ระบบ LINE OA สำหรับธุรกิจไทย</span>
+      <h1>เปลี่ยน LINE ให้เป็นหน้าร้านที่ทำงานให้คุณ</h1>
+      <p>ตั้งแต่เมนู ข้อความอัตโนมัติ ไปจนถึงระบบจองและจัดการลูกค้า — <b>เลือกเท่าที่ร้านคุณต้องการ</b> เริ่มเล็กแล้วค่อยโตได้</p>
+      <div class="hbtns">
+        <a class="btn-a" href="#zones">ดูว่ามีอะไรบ้าง →</a>
+        <a class="btn-b" href="#contact">ปรึกษาฟรี</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ZONES -->
+  <section class="sec" id="zones">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>เลือกแบบที่เหมาะกับร้านคุณ</h2>
+        <p>เราแบ่งเป็น 3 แบบ ตามว่าคุณอยากเริ่มแค่ไหน — หยิบของพร้อมใช้ เช่าระบบ หรือให้เราสร้างให้เฉพาะธุรกิจคุณ</p>
+      </div>
+      <div class="zones">
+
+        <a class="zone reveal" href="shelf.html">
+          <span class="stripe" style="background:#2fa36b"></span>
+          <div class="zt"><span class="zemoji">🟢</span><div><h3>มุมของพร้อมใช้</h3><span class="ztag">หยิบใช้ได้เลย</span></div></div>
+          <p class="zdesc">ของสำเร็จที่เห็นแล้วเข้าใจทันที เลือกแบบที่ชอบ หรือให้เราปรับให้เข้าแบรนด์คุณ</p>
+          <ul class="zlist"><li>Rich Menu</li><li>Flex Message</li><li>สติกเกอร์</li></ul>
+          <span class="zgo" style="color:#2fa36b">ดูของพร้อมใช้ →</span>
+        </a>
+
+        <a class="zone reveal" href="rent.html">
+          <span class="stripe" style="background:#2a7ab5"></span>
+          <div class="zt"><span class="zemoji">🔵</span><div><h3>ระบบเช่าใช้</h3><span class="ztag">จ่ายรายเดือน เริ่มฟรี</span></div></div>
+          <p class="zdesc">ระบบ LINE OA ครบวงจร — ตอบอัตโนมัติ จัดการลูกค้า ส่งข่าว ดูสถิติ เริ่มใช้ฟรี อัปเกรดเมื่อโต</p>
+          <ul class="zlist"><li>ตอบคีย์เวิร์ด</li><li>จัดการลูกค้า</li><li>ส่งข่าว/โปร</li><li>AI ช่วยตอบ</li></ul>
+          <span class="zgo" style="color:#2a7ab5">ดูแพ็กเกจ →</span>
+        </a>
+
+        <a class="zone reveal" href="forge.html">
+          <span class="stripe" style="background:#d98a2b"></span>
+          <div class="zt"><span class="zemoji">🟠</span><div><h3>สร้างให้เฉพาะธุรกิจ</h3><span class="ztag">ออกแบบตามงานคุณ</span></div></div>
+          <p class="zdesc">ธุรกิจที่มีขั้นตอนเฉพาะ เช่น จองคิว คลินิก ร้านอาหาร รถเช่า — เราสร้างระบบให้ตรงกับงานจริงของคุณ</p>
+          <ul class="zlist"><li>จองคิว/โต๊ะ</li><li>คลินิก</li><li>รถเช่า</li><li>งานเฉพาะทาง</li></ul>
+          <span class="zgo" style="color:#d98a2b">ปรึกษาโปรเจกต์ →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE -->
+  <section class="case">
+    <div class="wrap sec">
+      <div class="sec-head" style="margin-bottom:0;">
+        <h2>เราใช้ระบบนี้กับธุรกิจของเราเอง</h2>
+      </div>
+      <p class="q">“ทัวริสอัสใช้ zendbot จัดการลูกค้าทัวร์จริงทุกวัน — ระบบเดียวกับที่เราส่งต่อให้ร้านอื่น”</p>
+      <p class="who">— ทัวริสอัส · บริษัททัวร์ outbound</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <div class="box">
+        <h2>อยากให้ร้านคุณทำงานใน LINE ง่ายขึ้น?</h2>
+        <p>บอกเราว่าธุรกิจคุณคืออะไร เดี๋ยวเราแนะนำแบบที่เหมาะ — ปรึกษาฟรี ไม่มีข้อผูกมัด</p>
+        <a href="#" id="lineBtn">ทักเราทาง LINE →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span class="brand" style="font-size:16px;"><span class="mk"></span>zendbot</span>
+      <span>© zendbot · ระบบ LINE OA สำหรับธุรกิจไทย</span>
+    </div>
+  </footer>
+
+<script>
+  (function(){
+    var LINE_OA_URL = ""; // ← ใส่ลิงก์ LINE OA zendbot เมื่อ setup เสร็จ
+    document.querySelectorAll('#lineBtn, .navcta, .btn-b').forEach(function(b){
+      b.addEventListener('click', function(e){
+        var href = b.getAttribute('href');
+        if(href && href.indexOf('#')!==0) return; // ปล่อยลิงก์จริงไปตามปกติ
+        if(b.id==='lineBtn' || b.classList.contains('navcta')){
+          e.preventDefault();
+          if(!LINE_OA_URL){ alert('เร็วๆ นี้ — กำลังเตรียมช่องทาง LINE'); return; }
+          if(window.liff && liff.isInClient && liff.isInClient()){ liff.openWindow({url:LINE_OA_URL, external:true}); }
+          else { window.open(LINE_OA_URL, '_blank'); }
+        }
+      });
+    });
+  })();
+</script>
+<script>(function(){if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)return;var els=document.querySelectorAll(".reveal");if(!("IntersectionObserver"in window)){els.forEach(function(e){e.classList.add("in")});return;}var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}})},{threshold:.12});els.forEach(function(e){io.observe(e)});})();</script>
+</body>
+</html>

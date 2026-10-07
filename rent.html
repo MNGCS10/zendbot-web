@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ระบบเช่าใช้ · zendbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{box-sizing:border-box;--ink:#15202b;--muted:#5b6b7a;--line:#e4e9ee;--paper:#f6f8fa;--card:#fff;
+    --z-teal:#0B4A3C;--z-amber:#EF9F27;--blue:#2a7ab5;
+    padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  *,*::before,*::after{box-sizing:inherit}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans Thai",system-ui,sans-serif;line-height:1.6;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,32px);}
+  a{color:inherit}
+  .nav{position:sticky;top:0;z-index:20;background:rgba(246,248,250,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .brand{display:flex;align-items:center;gap:9px;font-family:"Prompt";font-weight:700;font-size:20px;text-decoration:none;}
+  .brand .mk{width:26px;height:26px;border-radius:7px;background:var(--z-teal);position:relative;}
+  .brand .mk::after{content:"";position:absolute;right:5px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--z-amber);}
+  .back{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;}
+  .hero{background:linear-gradient(140deg,var(--blue),#1f6192);color:#fff;padding:clamp(44px,8vw,80px) 0;}
+  .hero .wrap{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+  .eye{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);
+    padding:7px 15px;border-radius:999px;font-family:"Prompt";font-weight:600;font-size:13px;}
+  .hero h1{font-family:"Prompt";font-weight:700;font-size:clamp(28px,5.5vw,46px);line-height:1.12;margin:4px 0 0;max-width:17ch;}
+  .hero p{font-size:clamp(15px,2.3vw,19px);color:#dbeaf5;max-width:54ch;margin:0;}
+  .hero p b{color:#fff;font-weight:600;}
+  .sec{padding:clamp(40px,7vw,76px) 0;}
+  .sec-head{max-width:60ch;margin-bottom:clamp(24px,4vw,38px);}
+  .sec-head h2{font-family:"Prompt";font-weight:700;font-size:clamp(23px,4vw,34px);margin:0 0 10px;line-height:1.16;}
+  .sec-head p{color:var(--muted);font-size:clamp(15px,2vw,17px);margin:0;}
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(16px,2.5vw,22px);align-items:start;}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,3vw,30px);display:flex;flex-direction:column;gap:14px;position:relative;}
+  .plan.feat{border:2px solid var(--blue);box-shadow:0 16px 40px rgba(42,122,181,.16);}
+  .plan .pop{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-family:"Prompt";font-weight:600;font-size:12px;padding:5px 14px;border-radius:999px;white-space:nowrap;}
+  .plan .pname{font-family:"Prompt";font-weight:700;font-size:20px;}
+  .plan .price{display:flex;align-items:baseline;gap:5px;}
+  .plan .price .n{font-family:"Prompt";font-weight:700;font-size:34px;}
+  .plan .price .u{color:var(--muted);font-size:14px;}
+  .plan .ptag{color:var(--muted);font-size:13.5px;margin-top:-6px;}
+  .plan ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;flex:1;}
+  .plan li{display:flex;gap:9px;font-size:14px;align-items:flex-start;}
+  .plan li .ck{color:var(--blue);flex:none;font-weight:700;}
+  .plan li.off{color:var(--muted);}
+  .plan li.off .ck{color:var(--line);}
+  .plan .pbtn{text-align:center;text-decoration:none;font-family:"Prompt";font-weight:600;font-size:15px;padding:12px;border-radius:12px;margin-top:4px;}
+  .pbtn.solid{background:var(--blue);color:#fff;}
+  .pbtn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line);}
+  .note{color:var(--muted);font-size:13px;margin-top:18px;text-align:center;}
+  .meter{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .meter .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(14px,2.5vw,24px);}
+  .meter .it{display:flex;flex-direction:column;gap:5px;}
+  .meter .it .k{font-family:"Prompt";font-weight:600;font-size:16px;display:flex;gap:9px;align-items:center;}
+  .meter .it p{color:var(--muted);font-size:13.5px;margin:0;padding-left:28px;}
+  .cta{padding:clamp(40px,7vw,80px) 0;}
+  .cta .box{background:linear-gradient(140deg,var(--blue),#1f6192);color:#fff;border-radius:24px;padding:clamp(30px,5vw,52px);text-align:center;}
+  .cta h2{font-family:"Prompt";font-weight:700;font-size:clamp(23px,4vw,32px);margin:0 0 12px;}
+  .cta p{color:#dbeaf5;margin:0 auto 24px;max-width:46ch;font-size:16px;}
+  .cta a{display:inline-flex;align-items:center;gap:9px;background:var(--z-amber);color:#1a1200;text-decoration:none;font-family:"Prompt";font-weight:600;padding:14px 30px;border-radius:999px;font-size:17px;}
+  .foot{border-top:1px solid var(--line);}
+  .foot .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;padding:22px 0;color:var(--muted);font-size:13px;}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#eef3f7;--muted:#9fb0bf;--line:#283440;--paper:#0e151c;--card:#141d26;}.nav{background:rgba(14,21,28,.85);}}
+  :root[data-theme="dark"]{--ink:#eef3f7;--muted:#9fb0bf;--line:#283440;--paper:#0e151c;--card:#141d26;}
+  @media (prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}.reveal.in{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+  <nav class="nav"><div class="wrap">
+    <a class="brand" href="index.html"><span class="mk"></span>zendbot</a>
+    <a class="back" href="index.html">&larr; กลับหน้าแรก</a>
+  </div></nav>
+  <header class="hero"><div class="wrap">
+    <span class="eye">🔵 ระบบเช่าใช้</span>
+    <h1>ระบบ LINE OA ครบวงจร เริ่มฟรี จ่ายเมื่อโต</h1>
+    <p>ตอบลูกค้าอัตโนมัติ จัดการสมาชิก ส่งข่าว ดูสถิติ ครบในที่เดียว — <b>เริ่มใช้ฟรี</b> อัปเกรดเมื่อร้านโตขึ้น</p>
+  </div></header>
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><h2>เลือกแพ็กเกจที่พอดีกับร้านคุณ</h2><p>เริ่มฟรีได้เลย ลองใช้จริงก่อนตัดสินใจ — พอร้านโตค่อยอัปเกรดเพิ่มสิทธิ์</p></div>
+    <div class="plans">
+      <div class="plan reveal">
+        <span class="pname">FREE</span>
+        <div class="price"><span class="n">฿0</span><span class="u">/เดือน</span></div>
+        <p class="ptag">ลองใช้จริง เหมาะร้านเริ่มต้น</p>
+        <ul>
+          <li><span class="ck">✓</span>เชื่อม LINE OA 1 บัญชี</li>
+          <li><span class="ck">✓</span>ตอบคีย์เวิร์ด 10 คำ</li>
+          <li><span class="ck">✓</span>Rich Menu 1 เมนู</li>
+          <li><span class="ck">✓</span>ส่งข่าว 100 ครั้ง/เดือน</li>
+          <li class="off"><span class="ck">✓</span>AI ช่วยตอบ</li>
+          <li class="off"><span class="ck">✓</span>ดูสถิติเชิงลึก</li>
+        </ul>
+        <a class="pbtn ghost" href="#ask">เริ่มฟรี</a>
+      </div>
+      <div class="plan feat reveal">
+        <span class="pop">⭐ ยอดนิยม</span>
+        <span class="pname">PRO</span>
+        <div class="price"><span class="n">฿990</span><span class="u">/เดือน</span></div>
+        <p class="ptag">วันละ ฿33 — ถูกกว่าจ้างแอดมินตอบ</p>
+        <ul>
+          <li><span class="ck">✓</span>คีย์เวิร์ด <b>ไม่จำกัด</b></li>
+          <li><span class="ck">✓</span>Rich Menu 3 เมนู</li>
+          <li><span class="ck">✓</span>ส่งข่าว 1,000 ครั้ง/เดือน</li>
+          <li><span class="ck">✓</span><b>AI ช่วยตอบ</b> 500 ครั้ง/เดือน</li>
+          <li><span class="ck">✓</span>ดูสถิติ Rich Menu</li>
+          <li><span class="ck">✓</span>ไม่มีโลโก้ zendbot</li>
+        </ul>
+        <a class="pbtn solid" href="#ask">เลือก PRO</a>
+      </div>
+      <div class="plan reveal">
+        <span class="pname">MAX</span>
+        <div class="price"><span class="n">฿2,990</span><span class="u">/เดือน</span></div>
+        <p class="ptag">ร้านลูกค้าเยอะ หรือหลายสาขา</p>
+        <ul>
+          <li><span class="ck">✓</span>LINE OA สูงสุด 3 บัญชี</li>
+          <li><span class="ck">✓</span>Rich Menu ไม่จำกัด</li>
+          <li><span class="ck">✓</span>ส่งข่าว 5,000 ครั้ง/เดือน</li>
+          <li><span class="ck">✓</span>AI ช่วยตอบ 2,000 ครั้ง/เดือน</li>
+          <li><span class="ck">✓</span>ระบบสมาชิก/สะสมแต้ม</li>
+          <li><span class="ck">✓</span>ซัพพอร์ตเร็วพิเศษ</li>
+        </ul>
+        <a class="pbtn ghost" href="#ask">เลือก MAX</a>
+      </div>
+    </div>
+    <p class="note">จ่ายรายปี รับเพิ่ม 2 เดือน · ยกเลิกได้ทุกเมื่อ · ราคายังไม่รวม VAT</p>
+  </div></section>
+  <section class="meter"><div class="wrap sec">
+    <div class="sec-head"><h2>เพิ่มได้ตามการใช้งานจริง</h2><p>ถ้าใช้เกินแพ็กเกจ เติมเพิ่มได้เป็นครั้งคราว ไม่ต้องอัปทั้งแพ็ก</p></div>
+    <div class="grid">
+      <div class="it"><div class="k">🤖 AI ช่วยตอบ</div><p>เติมโควตา AI เมื่อช่วงลูกค้าถามเยอะ</p></div>
+      <div class="it"><div class="k">📢 ส่งข่าว/โปร</div><p>เติม broadcast ช่วงแคมเปญใหญ่</p></div>
+      <div class="it"><div class="k">🖼️ พื้นที่เก็บรูป</div><p>เพิ่มที่เก็บรูปสินค้า/สื่อ</p></div>
+    </div>
+  </div></section>
+  <section class="cta" id="ask"><div class="wrap"><div class="box">
+    <h2>เริ่มใช้ฟรีวันนี้</h2>
+    <p>ลองระบบจริงก่อน ไม่ต้องใส่บัตร — พร้อมอัปเกรดเมื่อร้านโต</p>
+    <a href="#" id="lineBtn">เริ่มใช้ฟรี ทาง LINE →</a>
+  </div></div></section>
+  <footer class="foot"><div class="wrap">
+    <a class="brand" href="index.html" style="font-size:16px;"><span class="mk"></span>zendbot</a>
+    <span>© zendbot · ระบบ LINE OA สำหรับธุรกิจไทย</span>
+  </div></footer>
+<script>
+  (function(){var LINE_OA_URL="";document.querySelectorAll('#lineBtn, .pbtn').forEach(function(b){
+    b.addEventListener('click',function(e){var h=b.getAttribute('href');
+      if(h && h.indexOf('#')!==0) return;e.preventDefault();
+      if(!LINE_OA_URL){alert('เร็วๆ นี้ — กำลังเตรียมช่องทาง LINE');return;}
+      if(window.liff&&liff.isInClient&&liff.isInClient()){liff.openWindow({url:LINE_OA_URL,external:true});}
+      else{window.open(LINE_OA_URL,'_blank');}});});})();
+</script>
+<script>(function(){if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)return;var els=document.querySelectorAll(".reveal");if(!("IntersectionObserver"in window)){els.forEach(function(e){e.classList.add("in")});return;}var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}})},{threshold:.12});els.forEach(function(e){io.observe(e)});})();</script>
+</body>
+</html>
