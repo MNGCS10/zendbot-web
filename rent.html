@@ -33,8 +33,8 @@
   .sec-head{max-width:60ch;margin-bottom:clamp(24px,4vw,38px);}
   .sec-head h2{font-family:"Prompt";font-weight:700;font-size:clamp(23px,4vw,34px);margin:0 0 10px;line-height:1.16;}
   .sec-head p{color:var(--muted);font-size:clamp(15px,2vw,17px);margin:0;}
-  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(16px,2.5vw,22px);align-items:start;}
-  .plan{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,3vw,30px);display:flex;flex-direction:column;gap:14px;position:relative;}
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(12px,1.6vw,16px);align-items:start;}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,2.2vw,24px);display:flex;flex-direction:column;gap:14px;position:relative;}
   .plan.feat{border:2px solid var(--blue);box-shadow:0 16px 40px rgba(42,122,181,.16);}
   .plan .pop{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-family:"Prompt";font-weight:600;font-size:12px;padding:5px 14px;border-radius:999px;white-space:nowrap;}
   .plan .pname{font-family:"Prompt";font-weight:700;font-size:20px;}
@@ -50,7 +50,16 @@
   .plan .pbtn{text-align:center;text-decoration:none;font-family:"Prompt";font-weight:600;font-size:15px;padding:12px;border-radius:12px;margin-top:4px;}
   .pbtn.solid{background:var(--blue);color:#fff;}
   .pbtn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line);}
+  .plan .price .n{font-size:30px;}
+  @media (min-width:1000px){.plans{grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;}}
+  .plan .was{color:var(--muted);font-size:13px;margin-top:-8px;}
+  .plan .was s{opacity:.8}
+  .plan .fnd{display:inline-block;align-self:flex-start;background:#fff4de;color:#7a4b00;border:1px solid #f3d9a4;font-family:"Prompt";font-weight:600;font-size:11.5px;padding:3px 10px;border-radius:999px;}
+  .plan .ann{color:var(--muted);font-size:12.5px;margin-top:-6px;}
   .note{color:var(--muted);font-size:13px;margin-top:18px;text-align:center;}
+  .note.l{max-width:70ch;margin-left:auto;margin-right:auto;}
+  :root[data-theme="dark"] .plan .fnd{background:#3a2e12;color:#f3d9a4;border-color:#5a4720;}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .plan .fnd{background:#3a2e12;color:#f3d9a4;border-color:#5a4720;}}
   .meter{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .meter .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(14px,2.5vw,24px);}
   .meter .it{display:flex;flex-direction:column;gap:5px;}
@@ -75,64 +84,98 @@
   </div></nav>
   <header class="hero"><div class="wrap">
     <span class="eye">🔵 ระบบเช่าใช้</span>
-    <h1>ระบบ LINE OA ครบวงจร เริ่มฟรี จ่ายเมื่อโต</h1>
-    <p>ตอบลูกค้าอัตโนมัติ จัดการสมาชิก ส่งข่าว ดูสถิติ ครบในที่เดียว — <b>เริ่มใช้ฟรี</b> อัปเกรดเมื่อร้านโตขึ้น</p>
+    <h1>ระบบ LINE OA สำหรับร้านไทย เริ่มฟรี จ่ายเมื่อโต</h1>
+    <p>ตอบคีย์เวิร์ดอัตโนมัติ จัดการ Rich Menu ตั้งเวลาเมนู และ AI ช่วยตอบ — <b>เริ่มใช้ฟรี</b> อัปเกรดเมื่อร้านโตขึ้น</p>
   </div></header>
   <section class="sec"><div class="wrap">
     <div class="sec-head"><h2>เลือกแพ็กเกจที่พอดีกับร้านคุณ</h2><p>เริ่มฟรีได้เลย ลองใช้จริงก่อนตัดสินใจ — พอร้านโตค่อยอัปเกรดเพิ่มสิทธิ์</p></div>
     <div class="plans">
       <div class="plan reveal">
-        <span class="pname">FREE</span>
+        <span class="pname">Free</span>
         <div class="price"><span class="n">฿0</span><span class="u">/เดือน</span></div>
         <p class="ptag">ลองใช้จริง เหมาะร้านเริ่มต้น</p>
         <ul>
-          <li><span class="ck">✓</span>เชื่อม LINE OA 1 บัญชี</li>
-          <li><span class="ck">✓</span>ตอบคีย์เวิร์ด 10 คำ</li>
-          <li><span class="ck">✓</span>Rich Menu 1 เมนู</li>
-          <li><span class="ck">✓</span>ส่งข่าว 100 ครั้ง/เดือน</li>
-          <li class="off"><span class="ck">✓</span>AI ช่วยตอบ</li>
-          <li class="off"><span class="ck">✓</span>ดูสถิติเชิงลึก</li>
+          <li><span class="ck">✓</span><span>เชื่อม LINE OA 1 บัญชี</span></li>
+          <li><span class="ck">✓</span><span>ตอบคีย์เวิร์ด 10 คำ</span></li>
+          <li><span class="ck">✓</span><span>Rich Menu 1 เมนู</span></li>
+          <li class="off"><span class="ck">✓</span><span>AI ช่วยตอบ</span></li>
+          <li class="off"><span class="ck">✓</span><span>ตั้งเวลาเมนู</span></li>
         </ul>
         <a class="pbtn ghost" href="#ask">เริ่มฟรี</a>
       </div>
-      <div class="plan feat reveal">
-        <span class="pop">⭐ ยอดนิยม</span>
-        <span class="pname">PRO</span>
-        <div class="price"><span class="n">฿990</span><span class="u">/เดือน</span></div>
-        <p class="ptag">วันละ ฿33 — ถูกกว่าจ้างแอดมินตอบ</p>
+      <div class="plan reveal">
+        <span class="pname">Start</span>
+        <div class="price"><span class="n">฿199</span><span class="u">/เดือน</span></div>
+        <p class="ann">รายปี ฿1,990 (จ่าย 10 เดือน รับ 12 เดือน)</p>
+        <p class="ptag">ร้านที่อยากตอบได้มากขึ้น</p>
         <ul>
-          <li><span class="ck">✓</span>คีย์เวิร์ด <b>ไม่จำกัด</b></li>
-          <li><span class="ck">✓</span>Rich Menu 3 เมนู</li>
-          <li><span class="ck">✓</span>ส่งข่าว 1,000 ครั้ง/เดือน</li>
-          <li><span class="ck">✓</span><b>AI ช่วยตอบ</b> 500 ครั้ง/เดือน</li>
-          <li><span class="ck">✓</span>ดูสถิติ Rich Menu</li>
-          <li><span class="ck">✓</span>ไม่มีโลโก้ zendbot</li>
+          <li><span class="ck">✓</span><span>เชื่อม LINE OA 1 บัญชี</span></li>
+          <li><span class="ck">✓</span><span>ตอบคีย์เวิร์ด 30 คำ</span></li>
+          <li><span class="ck">✓</span><span>Rich Menu 1 เมนู</span></li>
+          <li><span class="ck">✓</span><span>AI ช่วยตอบด้วยคีย์ AI ของคุณเอง</span></li>
+          <li class="off"><span class="ck">✓</span><span>ตั้งเวลาเมนู</span></li>
         </ul>
-        <a class="pbtn solid" href="#ask">เลือก PRO</a>
+        <a class="pbtn ghost" href="#ask">เลือก Start</a>
+      </div>
+      <div class="plan feat reveal">
+        <span class="pop">⭐ แนะนำ</span>
+        <span class="pname">Grow</span>
+        <span class="fnd">Founding · ล็อกราคา</span>
+        <div class="price"><span class="n">฿590</span><span class="u">/เดือน</span></div>
+        <p class="was">ราคาทั่วไป <s>฿690</s>/เดือน</p>
+        <p class="ann">รายปี ฿5,900 (ทั่วไป ฿6,900)</p>
+        <p class="ptag">ร้านที่กำลังโต อยากให้ AI ช่วยตอบ</p>
+        <ul>
+          <li><span class="ck">✓</span><span>เชื่อม LINE OA 1 บัญชี</span></li>
+          <li><span class="ck">✓</span><span>ตอบคีย์เวิร์ด 100 คำ</span></li>
+          <li><span class="ck">✓</span><span>Rich Menu 5 เมนู + ตัวสร้างเมนู</span></li>
+          <li><span class="ck">✓</span><span><b>AI ช่วยตอบ</b> 300 ครั้ง/เดือน</span></li>
+          <li><span class="ck">✓</span><span>ตั้งเวลาเมนู</span></li>
+          <li><span class="ck">✓</span><span>ดูสถิติ Rich Menu</span></li>
+        </ul>
+        <a class="pbtn solid" href="#ask">เลือก Grow</a>
       </div>
       <div class="plan reveal">
-        <span class="pname">MAX</span>
-        <div class="price"><span class="n">฿2,990</span><span class="u">/เดือน</span></div>
-        <p class="ptag">ร้านลูกค้าเยอะ หรือหลายสาขา</p>
+        <span class="pname">Pro</span>
+        <span class="fnd">Founding · ล็อกราคา</span>
+        <div class="price"><span class="n">฿990</span><span class="u">/เดือน</span></div>
+        <p class="was">ราคาทั่วไป <s>฿1,290</s>/เดือน</p>
+        <p class="ann">รายปี ฿9,900 (ทั่วไป ฿12,900)</p>
+        <p class="ptag">หลายช่องทาง ลูกค้าถามเยอะ</p>
         <ul>
-          <li><span class="ck">✓</span>LINE OA สูงสุด 3 บัญชี</li>
-          <li><span class="ck">✓</span>Rich Menu ไม่จำกัด</li>
-          <li><span class="ck">✓</span>ส่งข่าว 5,000 ครั้ง/เดือน</li>
-          <li><span class="ck">✓</span>AI ช่วยตอบ 2,000 ครั้ง/เดือน</li>
-          <li><span class="ck">✓</span>ระบบสมาชิก/สะสมแต้ม</li>
-          <li><span class="ck">✓</span>ซัพพอร์ตเร็วพิเศษ</li>
+          <li><span class="ck">✓</span><span>เชื่อม LINE OA 2 บัญชี</span></li>
+          <li><span class="ck">✓</span><span>ตอบคีย์เวิร์ด 500 คำ</span></li>
+          <li><span class="ck">✓</span><span>Rich Menu 10 เมนู + ตัวสร้างเมนู</span></li>
+          <li><span class="ck">✓</span><span><b>AI ช่วยตอบ</b> 1,000 ครั้ง/เดือน</span></li>
+          <li><span class="ck">✓</span><span>ตั้งเวลาเมนู</span></li>
+          <li><span class="ck">✓</span><span>ดูสถิติ Rich Menu</span></li>
         </ul>
-        <a class="pbtn ghost" href="#ask">เลือก MAX</a>
+        <a class="pbtn ghost" href="#ask">เลือก Pro</a>
+      </div>
+      <div class="plan reveal">
+        <span class="pname">Business</span>
+        <div class="price"><span class="n">฿1,990</span><span class="u">/เดือน</span></div>
+        <p class="ann">รายปี ฿19,900 (จ่าย 10 เดือน รับ 12 เดือน)</p>
+        <p class="ptag">หลายสาขา ร้านลูกค้าเยอะ</p>
+        <ul>
+          <li><span class="ck">✓</span><span>เชื่อม LINE OA 5 บัญชี</span></li>
+          <li><span class="ck">✓</span><span>ตอบคีย์เวิร์ด <b>ไม่จำกัด</b></span></li>
+          <li><span class="ck">✓</span><span>Rich Menu 30 เมนู + ตัวสร้างเมนู</span></li>
+          <li><span class="ck">✓</span><span><b>AI ช่วยตอบ</b> 3,000 ครั้ง/เดือน</span></li>
+          <li><span class="ck">✓</span><span>ตั้งเวลาเมนู</span></li>
+          <li><span class="ck">✓</span><span>ดูสถิติ Rich Menu</span></li>
+        </ul>
+        <a class="pbtn ghost" href="#ask">เลือก Business</a>
       </div>
     </div>
-    <p class="note">จ่ายรายปี รับเพิ่ม 2 เดือน · ยกเลิกได้ทุกเมื่อ · ราคายังไม่รวม VAT</p>
+    <p class="note l"><b>ราคา Founding</b> สำหรับร้านที่สมัครและชำระงวดแรกภายใน 28 ก.พ. 2027 (จำกัด 30 ร้านแรก) ล็อกราคานี้ตราบที่ต่ออายุต่อเนื่อง · ราคาทั่วไปใช้หลังจากนั้น</p>
+    <p class="note l">แถมชุดเมนู Rich Menu "ปีใหม่ 2027" ให้ทุกแพ็กเกจ · ยกเลิกได้ทุกเมื่อ · ราคายังไม่รวม VAT</p>
   </div></section>
   <section class="meter"><div class="wrap sec">
-    <div class="sec-head"><h2>เพิ่มได้ตามการใช้งานจริง</h2><p>ถ้าใช้เกินแพ็กเกจ เติมเพิ่มได้เป็นครั้งคราว ไม่ต้องอัปทั้งแพ็ก</p></div>
+    <div class="sec-head"><h2>Add-on สายสร้างสรรค์</h2><p>ของเสริมสำหรับร้านที่อยากให้แบรนด์เด่นขึ้น — สอบถามรายละเอียดและราคาทาง LINE</p></div>
     <div class="grid">
-      <div class="it"><div class="k">🤖 AI ช่วยตอบ</div><p>เติมโควตา AI เมื่อช่วงลูกค้าถามเยอะ</p></div>
-      <div class="it"><div class="k">📢 ส่งข่าว/โปร</div><p>เติม broadcast ช่วงแคมเปญใหญ่</p></div>
-      <div class="it"><div class="k">🖼️ พื้นที่เก็บรูป</div><p>เพิ่มที่เก็บรูปสินค้า/สื่อ</p></div>
+      <div class="it"><div class="k">🎨 ชุดเมนูเทศกาล</div><p>ชุด Rich Menu ตามเทศกาล ติดตั้งแล้วใส่ปลายทางปุ่มของร้านได้เลย</p></div>
+      <div class="it"><div class="k">💬 สติกเกอร์ LINE สำหรับแบรนด์</div><p>ออกแบบสติกเกอร์ชุดของร้าน (แพ็กเกจ Business)</p></div>
     </div>
   </div></section>
   <section class="cta" id="ask"><div class="wrap"><div class="box">
